@@ -17,8 +17,7 @@ fileConfig="/home/pi/Desktop/configKiosk.json"
 
 preferencesChromiumFile="/home/pi/.config/chromium/Default/Preferences"
 
-# TODO: URL = localhost and start node express server that read image files 
-url="$pathProject/../frontend/web/index.html"
+url="localhost:8080"
 log "Set url: $url"
 
 log "Enable SSH Server"
@@ -27,7 +26,6 @@ if [ ! $(systemctl -q is-active ssh) ]; then
     sudo systemctl start ssh
 fi
 log "SSH Server UP!"
-
 
 log "Hide the mouse from the display whenever it has been idle for longer then 0.5 seconds"
 unclutter -idle 0.5 -root &
