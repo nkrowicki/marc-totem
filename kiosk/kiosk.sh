@@ -1,8 +1,27 @@
 #!/bin/bash
 
-# Vars
+#######################################################################
+# Start Vars declaration
 # Full path of this file without filename
 pathProject=`dirname $(realpath $0)`
+
+# Server PORT
+PORT="8080"
+
+preferencesChromiumFile="/home/pi/.config/chromium/Default/Preferences"
+
+# Command line for load default img to load when errors occurs
+show_default_image="eog -f frontend/public/default-image.png &"
+
+# url
+url="localhost:$PORT"
+
+# End Vars declaration
+#######################################################################
+
+
+
+
 
 # Cd folder that contain project
 cd $pathProject
@@ -12,12 +31,28 @@ if [ "$(type -t log)" != 'function' ]; then
         source log4bash.sh
 fi
 
-# Vars
-fileConfig="/home/pi/Desktop/configKiosk.json"
 
-preferencesChromiumFile="/home/pi/.config/chromium/Default/Preferences"
 
-url="localhost:8080"
+
+
+#######################################################################
+# Start Functions declaration
+
+# Function start_server
+start_server(){
+
+        killall node 2> /dev/null
+
+        log "Run npm start --prefix backend/ &"
+        npm start --prefix backend/ &
+        sleep 5
+}
+
+# End Functions declaration
+#######################################################################
+
+
+
 log "Set url: $url"
 
 log "Enable SSH Server"
@@ -34,6 +69,58 @@ log "Disable scren saver"
 xset s noblank
 xset s off
 xset -dpms
+
+
+
+##########################################################################
+# Start check node server
+
+##########################################################
+# Start verify $PORT
+# Verify if port $PORT is listen
+log "Verify status port $PORT:"
+
+if lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null ; then
+    log "Port $PORT: LISTEN"
+else
+    log "Port $PORT: NOT LISTEN"
+    start_server
+
+    if ! pidof node >/dev/null ; then
+        log "Node process not found"
+        start_server
+
+    fi
+
+fi
+# End verify $PORT
+##########################################################
+
+
+##########################################################
+# Start Verify HTTP CODE response
+log "Verify HTTP CODE return of localhost:$PORT.."
+HTTP_RESPONSE_CODE=`curl -Is localhost:$PORT | head -1 | awk '{ print $2 }'`
+
+# If HTTP_RESPONSE_CODE is empty assign 1
+[ -z "$HTTP_RESPONSE_CODE" ] && HTTP_RESPONSE_CODE=1
+
+log "HTTP RESPONSE CODE IS: $HTTP_RESPONSE_CODE"
+
+if [ $HTTP_RESPONSE_CODE -ne 200 ]; then
+        start_server
+
+        if [ $HTTP_RESPONSE_CODE -ne 200 ]; then
+        $show_default_image
+        fi
+
+fi
+# End Verify HTTP CODE response
+##########################################################
+
+# End check node server
+##########################################################################
+
 
 log "Use sed to search throught the Chromium preferences file and clear out any flags that would make the warning bar appear, a behavior you dont really want happening on yout Raspberry Pi Kiosk."
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' $preferencesChromiumFile

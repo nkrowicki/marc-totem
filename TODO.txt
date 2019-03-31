@@ -4,17 +4,17 @@ Install.sh:
 - apt-get install node -y
 - cd && npm install -y 
 
-Que el kiosk.sh lo cargue node una vez que levante el servidor?
-- Run npm start && 
-
 ok -> El kiosk.sh la url sea localhost:8080
 
 
 
+### OK OK OK ####
 
-Kiosk: que levnante solo si se levantó el servidor..
 
-Hay forma de detectar si el kiosk tira error 404 porque no encuentra pagina?
+Kkiosk.sh run npm only if node is not execute
+- Run npm start && 
+- Que levante solo si se levantó el servidor..
+- Hay forma de detectar si el kiosk tira error 404 porque no encuentra pagina?
 
 
 
