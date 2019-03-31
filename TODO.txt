@@ -1,12 +1,23 @@
 TODO:
 
-Frontend: que reciba los datos y por cada uelemento del array construya
+Install.sh: 
+- apt-get install node -y
+- cd && npm install -y 
 
-Install.sh: Que instale node, que haga un npm install para instalar las dependencias
-Modificar el kiosk.sh para que levante el servidor antes de abrir chromium
+Que el kiosk.sh lo cargue node una vez que levante el servidor?
+- Run npm start && 
 
 ok -> El kiosk.sh la url sea localhost:8080
 
+
+
+
 Kiosk: que levnante solo si se levantó el servidor..
+
 Hay forma de detectar si el kiosk tira error 404 porque no encuentra pagina?
+
+
+
+
+rm jq on install line
 

@@ -7,6 +7,7 @@ pathProject=`dirname $(realpath $0)`
 # Cd folder that contain project
 cd $pathProject
 
+
 # Load log4bash (only is was not loaded)
 if [ "$(type -t log)" != 'function' ]; then
         source log4bash.sh
@@ -56,7 +57,7 @@ apt-get upgrade -y
 echo "Install xdtotool, unclutter and sed"
 echo "xdotool: Allow our bash script to execute key presses withouth anyone being on the device"
 echo "unclutter: Enable us to hide the mouse from the display"
-apt-get install -y xdotool unclutter sed chromium-browser ttf-mscorefonts-installer x11-xserver-utils pv hdparm htop jq vim
+apt-get install -y xdotool unclutter sed chromium-browser ttf-mscorefonts-installer x11-xserver-utils pv hdparm htop jq vim node
 
 echo "Set up autostart config"
 echo "Set up auto login to our user-> Desktop autologin is the default behavior."
@@ -153,11 +154,15 @@ if [ ! -f $fileLog ]; then
     touch $fileLog
 fi
 
-echo "Add execution permissions"
+echo "Add execution permissions for bash and javascript files"
 chmod +x *.sh
+chmod +x *.js
+
 
 echo "Change owner of files"
 chown -R pi:pi .
+
+cd backend && npm install -y
 
 # End install
 log "End Install.sh ->  Reboot System"
