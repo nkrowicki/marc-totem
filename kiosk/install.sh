@@ -125,8 +125,11 @@ echo "Line: $kioskScriptLine -> OK"
 
 # BackupFile Preferences Chromium
 echo "Backup file $preferencesChromiumFile to $preferencesChromiumFileBpk"
-cp -f $preferencesChromiumFile $preferencesChromiumFileBpk
+if cp -f $preferencesChromiumFile $preferencesChromiumFileBpk; then
 echo "Backup Preferences Chromium File -> OK"
+else
+echo "Backup Preferences Chromium File -> Failed (Possibly the file does not exist)"
+fi
 
 # Crontab
 echo
