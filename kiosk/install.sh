@@ -165,16 +165,16 @@ fi
 echo "Run: Cd .. (Root directory of this project)"
 cd ..
 
-echo "Add execution permissions for bash and javascript files"
-chmod -R +x *.sh
-chmod -R +x *.js
+echo "Add execution permissions for bash and javascript files in the whole project"
+find . -name "*.sh" -exec chmod +x {} \;
+find . -name "*.js" -exec chmod +x {} \;
 
 echo "Change owner of files"
 chown -R pi:pi .
 
 echo "Cd backend and install dependences with npm"
 cd backend && npm install -y
-
+ 
 # End install
 log "End Install.sh ->  Reboot System"
 
