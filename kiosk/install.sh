@@ -57,7 +57,7 @@ apt-get upgrade -y
 echo "Install xdtotool, unclutter and sed"
 echo "xdotool: Allow our bash script to execute key presses withouth anyone being on the device"
 echo "unclutter: Enable us to hide the mouse from the display"
-apt-get install -y xdotool unclutter sed chromium-browser ttf-mscorefonts-installer x11-xserver-utils pv hdparm htop vim nodejs npm eog chromium-browser
+apt-get install -y xdotool unclutter sed chromium-browser ttf-mscorefonts-installer x11-xserver-utils pv hdparm htop vim nodejs npm eog chromium-browser lsof
 
 echo "Set up autostart config"
 echo "Set up auto login to our user-> Desktop autologin is the default behavior."
@@ -78,9 +78,12 @@ cp -f $tempFile $configFile
 rm $tempFile
 
 # Rotate display 90 degrees
-echo "" >> $configFile
-echo "# Rotate display 90 degrees" >> $configFile
-echo "display_rotate=1" >> $configFile
+if ! grep -Fxq "display_rotate=1" $configFile ; then
+    echo "" >> $configFile
+    echo "# Rotate display 90 degrees" >> $configFile
+    echo "display_rotate=1" >> $configFile
+fi
+
 # If you are using the Official Raspberry Pi touch screen you can use “lcd_rotate” rather than “display_rotate”.
 # NOTE: You can rotate both the image and touch interface 180º by entering lcd_rotate=2 instead
 
