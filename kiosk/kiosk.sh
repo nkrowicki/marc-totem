@@ -41,14 +41,14 @@ fi
 # Function start_server
 start_server(){
 
-        echo "aca"
-
-        killall node 2> /dev/null
-
-        echo "aca tambien"
+        if killall node 2> /dev/null ; then
+            log "Execute killall node"
+        else
+            log "Execute killall node"
+        fi
 
         log "Run npm start --prefix backend/ &"
-        npm start --prefix backend/ &
+        npm start --prefix ../backend/ &
         sleep 5
 }
 
@@ -127,8 +127,12 @@ fi
 
 
 log "Use sed to search throught the Chromium preferences file and clear out any flags that would make the warning bar appear, a behavior you dont really want happening on yout Raspberry Pi Kiosk."
-sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' $preferencesChromiumFile
-sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' $preferencesChromiumFile
+if sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' $preferencesChromiumFile ; then
+log "Line Chromium preferences exited cleanly -> OK"
+fi
+if sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' $preferencesChromiumFile ; then
+log "Line Chromium preferences exited cleanly -> OK"
+fi
 
 log "Execute Chromium" 
 /usr/bin/chromium-browser --noerrdialogs --disable-infobars --incognito --start-maximized --kiosk --force-device-scale-factor=1 $url &
