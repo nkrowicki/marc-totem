@@ -138,7 +138,12 @@ echo
 crontabLine="*/20 * * * * sudo ${pathProject}/$scriptUpdate"
 crontabLineEscapeCharacters="${crontabLine//\*/\\*}"
 echo "Escape: $crontabLineEscapeCharacters"
-crontab -u pi -l > mycron
+if crontab -u pi -l ; then
+        crontab -u pi -l > mycron
+else
+        echo "" > mycron
+fi
+
 if ! grep -q "$crontabLineEscapeCharacters" mycron 
 then
     # code if not found
@@ -158,8 +163,8 @@ if [ ! -f $fileLog ]; then
 fi
 
 echo "Add execution permissions for bash and javascript files"
-chmod +x *.sh
-chmod +x *.js
+chmod -R +x ../*.sh
+chmod -R +x ../*.js
 
 echo "Change owner of files"
 chown -R pi:pi .
