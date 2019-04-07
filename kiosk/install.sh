@@ -162,9 +162,12 @@ if [ ! -f $fileLog ]; then
     touch $fileLog
 fi
 
+echo "Run: Cd .. (Root directory of this project)"
+cd ..
+
 echo "Add execution permissions for bash and javascript files"
-chmod -R +x ../*.sh
-chmod -R +x ../*.js
+chmod -R +x *.sh
+chmod -R +x *.js
 
 echo "Change owner of files"
 chown -R pi:pi .
