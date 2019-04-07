@@ -57,7 +57,7 @@ apt-get upgrade -y
 echo "Install xdtotool, unclutter and sed"
 echo "xdotool: Allow our bash script to execute key presses withouth anyone being on the device"
 echo "unclutter: Enable us to hide the mouse from the display"
-apt-get install -y xdotool unclutter sed chromium-browser ttf-mscorefonts-installer x11-xserver-utils pv hdparm htop vim node eog chromium-browser
+apt-get install -y xdotool unclutter sed chromium-browser ttf-mscorefonts-installer x11-xserver-utils pv hdparm htop vim nodejs npm eog chromium-browser
 
 echo "Set up autostart config"
 echo "Set up auto login to our user-> Desktop autologin is the default behavior."
