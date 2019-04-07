@@ -41,7 +41,11 @@ fi
 # Function start_server
 start_server(){
 
+        echo "aca"
+
         killall node 2> /dev/null
+
+        echo "aca tambien"
 
         log "Run npm start --prefix backend/ &"
         npm start --prefix backend/ &
