@@ -35,7 +35,7 @@ preferencesChromiumFileBpk+="_bkp_$TODAY"
 kioskScript="${pathProject}/kiosk.sh"
 kioskScriptLine="@bash $kioskScript"
 
-echo "This script install Kiosk to Dr Ahorro"
+echo "This script install Kiosk to Marc"
 echo "--------------------------------------"
 echo "Creator: Nahuel Krowicki"
 echo "Contact: nahuelkrowicki@gmail.com"
