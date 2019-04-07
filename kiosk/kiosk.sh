@@ -40,18 +40,33 @@ fi
 
 # Function start_server
 start_server(){
-
         if killall node 2> /dev/null ; then
             log "Execute killall node"
         else
             log "Execute killall node"
         fi
 
-        log "Run npm start --prefix backend/ &"
-        npm start --prefix ../backend/ &
+        log "Cd ..backend"
+        cd ../backend
+        log "Run npm start &"
+        npm start &
         sleep 5
 }
 
+# Function start_chromium
+start_chromium(){
+    # Start chromium
+        log "Use sed to search throught the Chromium preferences file and clear out any flags that would make the warning bar appear, a behavior you dont really want happening on yout Raspberry Pi Kiosk."
+        if sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' $preferencesChromiumFile ; then
+        log "Line Chromium preferences exited cleanly -> OK"
+        fi
+        if sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' $preferencesChromiumFile ; then
+        log "Line Chromium preferences exited cleanly -> OK"
+        fi
+
+        log "Execute Chromium" 
+        /usr/bin/chromium-browser --noerrdialogs --disable-infobars --incognito --start-maximized --kiosk --force-device-scale-factor=1 $url &
+}
 # End Functions declaration
 #######################################################################
 
@@ -117,18 +132,10 @@ if [ $HTTP_RESPONSE_CODE -ne 200 ]; then
         if [ $HTTP_RESPONSE_CODE -ne 200 ]; then
             $show_default_image &
         else
-            # Start chromium
-            log "Use sed to search throught the Chromium preferences file and clear out any flags that would make the warning bar appear, a behavior you dont really want happening on yout Raspberry Pi Kiosk."
-            if sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' $preferencesChromiumFile ; then
-            log "Line Chromium preferences exited cleanly -> OK"
-            fi
-            if sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' $preferencesChromiumFile ; then
-            log "Line Chromium preferences exited cleanly -> OK"
-            fi
-
-            log "Execute Chromium" 
-            /usr/bin/chromium-browser --noerrdialogs --disable-infobars --incognito --start-maximized --kiosk --force-device-scale-factor=1 $url &
+            start_chromium
         fi
+else
+        start_chromium
 
 fi
 # End Verify HTTP CODE response
