@@ -11,7 +11,7 @@ PORT="8080"
 preferencesChromiumFile="/home/pi/.config/chromium/Default/Preferences"
 
 # Command line for load default img to load when errors occurs
-show_default_image="eog -f frontend/public/default-image.png &"
+show_default_image="eog -f /home/pi/marc-totem/frontend/public/default-image.png"
 
 # url
 url="localhost:$PORT"
@@ -115,7 +115,19 @@ if [ $HTTP_RESPONSE_CODE -ne 200 ]; then
         start_server
 
         if [ $HTTP_RESPONSE_CODE -ne 200 ]; then
-        $show_default_image
+            $show_default_image &
+        else
+            # Start chromium
+            log "Use sed to search throught the Chromium preferences file and clear out any flags that would make the warning bar appear, a behavior you dont really want happening on yout Raspberry Pi Kiosk."
+            if sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' $preferencesChromiumFile ; then
+            log "Line Chromium preferences exited cleanly -> OK"
+            fi
+            if sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' $preferencesChromiumFile ; then
+            log "Line Chromium preferences exited cleanly -> OK"
+            fi
+
+            log "Execute Chromium" 
+            /usr/bin/chromium-browser --noerrdialogs --disable-infobars --incognito --start-maximized --kiosk --force-device-scale-factor=1 $url &
         fi
 
 fi
@@ -126,13 +138,3 @@ fi
 ##########################################################################
 
 
-log "Use sed to search throught the Chromium preferences file and clear out any flags that would make the warning bar appear, a behavior you dont really want happening on yout Raspberry Pi Kiosk."
-if sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' $preferencesChromiumFile ; then
-log "Line Chromium preferences exited cleanly -> OK"
-fi
-if sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' $preferencesChromiumFile ; then
-log "Line Chromium preferences exited cleanly -> OK"
-fi
-
-log "Execute Chromium" 
-/usr/bin/chromium-browser --noerrdialogs --disable-infobars --incognito --start-maximized --kiosk --force-device-scale-factor=1 $url &
