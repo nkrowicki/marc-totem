@@ -4,8 +4,6 @@ let images = [];
 let style = document.createElement("style");
 // Default image
 let defaultImage = "default-image.png";
-// Host
-let host = window.location.hostname;
 
 // Function getJSON
 var getJSON = function(url, callback) {
@@ -35,10 +33,7 @@ var showDefaultImage = function(){
 
 
 // Get images
-
-// getJSON("http://localhost:8080/getImages", function(err, data) {
-let getImages = host.concat('/getImages')
-getJSON(getImages, function(err, data) {
+getJSON("/getImages", function(err, data) {
   if (err !== null) {
     console.log("Something went wrong: " + err);
 

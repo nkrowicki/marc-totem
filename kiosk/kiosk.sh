@@ -50,7 +50,7 @@ start_server(){
         cd ../backend
         log "Run npm start &"
         npm start &
-        sleep 5
+        sleep 10
 }
 
 # Function start_chromium
