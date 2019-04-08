@@ -14,7 +14,7 @@ preferencesChromiumFile="/home/pi/.config/chromium/Default/Preferences"
 show_default_image="eog -f /home/pi/marc-totem/frontend/public/default-image.png"
 
 # url
-url="localhost:$PORT"
+url="http://localhost:$PORT"
 
 # End Vars declaration
 #######################################################################
