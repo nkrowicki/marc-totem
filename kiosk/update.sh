@@ -2,8 +2,14 @@
 
 # Vars
 
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+SCRIPT=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+
 # Full path of this file without filename
-pathProject=`dirname $(realpath $0)`
+# pathProject=`dirname $(realpath $0)`
 
 # Flag to know if the install file has changed (0: not changed - 1: changed)
 flag=0
@@ -14,7 +20,7 @@ installNew="./${installFilename}"
 installOld="/home/pi/${installFilename}_Old"
 
 # Cd folder that contain project
-cd $pathProject
+cd $SCRIPTPATH
 
 # Load log4bash (only is was not loaded)
 if [ "$(type -t log)" != 'function' ]; then

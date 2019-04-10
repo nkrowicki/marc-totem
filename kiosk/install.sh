@@ -1,11 +1,18 @@
 #!/bin/bash
 
 # Vars
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+SCRIPT=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+
 # Full path of this file without filename
-pathProject=`dirname $(realpath $0)`
+# pathProject=`dirname $(realpath $0)`
 
 # Cd folder that contain project
-cd $pathProject
+cd $SCRIPTPATH
 
 
 # Load log4bash (only is was not loaded)
@@ -32,7 +39,7 @@ preferencesChromiumFileBpk="$preferencesChromiumFile"
 preferencesChromiumFileBpk+="_bkp_$TODAY"
 
 # Kiosk Script Path
-kioskScript="${pathProject}/kiosk.sh"
+kioskScript="${SCRIPTPATH}/kiosk.sh"
 kioskScriptLine="@bash $kioskScript"
 
 echo "This script install Kiosk to Marc"
@@ -138,7 +145,7 @@ fi
 echo
 echo "Add crontab line for run update each 30 minutes"
 echo
-crontabLine="*/20 * * * * sudo ${pathProject}/$scriptUpdate"
+crontabLine="*/20 * * * * sudo ${SCRIPTPATH}/$scriptUpdate"
 crontabLineEscapeCharacters="${crontabLine//\*/\\*}"
 echo "Escape: $crontabLineEscapeCharacters"
 if crontab -u pi -l ; then

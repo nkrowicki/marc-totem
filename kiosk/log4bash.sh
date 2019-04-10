@@ -9,13 +9,20 @@ set -e  # Fail on first error
 
 # Vars
 
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+SCRIPT=$(readlink -f "$0")
+# Absolute path this script is in, thus /home/user/bin
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+
 # Full path of this file without filename
-pathProject=`dirname $(realpath $0)`
+# pathProject=`dirname $(realpath $0)`
+
 # Cd folder that contain project
-cd $pathProject
+cd $SCRIPTPATH
 # Log Filename 
 filenameLog="kiosk.log"
-LOGFILE="${pathProject}/${filenameLog}"
+LOGFILE="${SCRIPTPATH}/${filenameLog}"
 
 # Useful global variables that users may wish to reference
 SCRIPT_ARGS="$@"
