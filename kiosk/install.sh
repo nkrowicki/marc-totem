@@ -141,9 +141,13 @@ else
 echo "Backup Preferences Chromium File -> Failed (Possibly the file does not exist)"
 fi
 
+
+#################################################################################
+# start crontab config
+#################################################################################
 # Crontab
 echo
-echo "Add crontab line for run update each 30 minutes"
+echo "Add crontab line for run update each 20 minutes"
 echo
 crontabLine="*/20 * * * * sudo ${SCRIPTPATH}/$scriptUpdate"
 crontabLineEscapeCharacters="${crontabLine//\*/\\*}"
@@ -161,6 +165,30 @@ then
     crontab -u pi mycron
 fi
 rm mycron
+
+echo
+echo "Add crontab line for run server js on boot"
+echo
+crontabLine="@reboot sudo /usr/bin/nodejs /home/pi/marc-totem/backend/server.js"
+crontabLineEscapeCharacters="${crontabLine//\*/\\*}"
+echo "Escape: $crontabLineEscapeCharacters"
+if crontab -u pi -l ; then
+        crontab -u pi -l > mycron
+else
+        echo "" > mycron
+fi
+
+if ! grep -q "$crontabLineEscapeCharacters" mycron 
+then
+    # code if not found
+    echo "$crontabLine" >> mycron
+    crontab -u pi mycron
+fi
+rm mycron
+
+#################################################################################
+# end crontab config
+#################################################################################
 
 # Create $fileLog only if not exist
 echo "Create fileLog ($fileLog) only if not exist"

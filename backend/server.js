@@ -5,7 +5,7 @@ let express = require("express"),
   // getting port this way
   port = process.env.PORT || process.argv[2] || 8080;
 
-let publicDirectory = "../frontend/public",
+let publicDirectory = "/home/pi/marc-totem/frontend/public",
   publicImgDirectory = "imgs",
   imgDirectory = path.join(publicDirectory, publicImgDirectory),
   arrayWithPublicPathImgs = [];
