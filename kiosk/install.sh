@@ -17,6 +17,8 @@ log "Start Install.sh"
 # Vars
 
 fileLog="kiosk.log"
+# Absolute path to 'nodejs' (e.g.: /usr/bin/nodejs)
+NODEJS=$(which nodejs)
 
 scriptUpdate="update.sh"
 TODAY=$(date +%F)
@@ -161,7 +163,7 @@ rm mycron
 echo
 echo "Add crontab line for run server js on boot"
 echo
-crontabLine="@reboot sudo /usr/bin/nodejs $BACKENDPATH/server.js"
+crontabLine="@reboot sudo $NODEJS $BACKENDPATH/server.js"
 crontabLineEscapeCharacters="${crontabLine//\*/\\*}"
 echo "Escape: $crontabLineEscapeCharacters"
 if crontab -u pi -l ; then
