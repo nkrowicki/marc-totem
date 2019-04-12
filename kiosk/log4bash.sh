@@ -19,11 +19,11 @@ filenameLog="kiosk.log"
 LOGFILE="${SCRIPTPATH}/${filenameLog}"
 
 # Useful global variables that users may wish to reference
-SCRIPT_ARGS="$@"
-SCRIPT_NAME="$0"
-SCRIPT_NAME="${SCRIPT_NAME#\./}"
-SCRIPT_NAME="${SCRIPT_NAME##/*/}"
-SCRIPT_BASE_DIR="$(cd "$( dirname "$0")" && pwd )"
+#SCRIPT_ARGS="$@"
+#SCRIPT_NAME="$0"
+#SCRIPT_NAME="${SCRIPT_NAME#\./}"
+#SCRIPT_NAME="${SCRIPT_NAME##/*/}"
+#SCRIPT_BASE_DIR="$(cd "$( dirname "$0")" && pwd )"
 
 # This should probably be the right way - didn't have time to experiment though
 # declare -r INTERACTIVE_MODE="$([ tty --silent ] && echo on || echo off)"
