@@ -15,10 +15,7 @@ SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 
 
-# Full path of this file without filename
-# pathProject=`dirname $(realpath $0)`
-
-# Cd folder that contain project
+# Cd folder that contain this script
 cd $SCRIPTPATH
 # Log Filename 
 filenameLog="kiosk.log"

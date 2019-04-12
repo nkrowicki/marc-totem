@@ -9,9 +9,6 @@ SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 
 
-# Full path of this file without filename
-# pathProject=`dirname $(realpath $0)`
-
 # Server PORT
 PORT="8080"
 
@@ -30,7 +27,7 @@ url="http://localhost:$PORT"
 
 
 
-# Cd folder that contain project
+# Cd folder that contain this script
 cd $SCRIPTPATH
 
 # Load log4bash (only is was not loaded)

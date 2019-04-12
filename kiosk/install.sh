@@ -6,12 +6,12 @@
 SCRIPT=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 SCRIPTPATH=$(dirname "$SCRIPT")
+# Absolute PROJECT path
+PROJECTPATH=$(dirname "$SCRIPTPATH")
+# Absolute BACKEND path
+BACKENDPATH="$PROJECTPATH/backend"
 
-
-# Full path of this file without filename
-# pathProject=`dirname $(realpath $0)`
-
-# Cd folder that contain project
+# Cd folder that contain this script
 cd $SCRIPTPATH
 
 
@@ -169,7 +169,7 @@ rm mycron
 echo
 echo "Add crontab line for run server js on boot"
 echo
-crontabLine="@reboot sudo /usr/bin/nodejs /home/pi/marc-totem/backend/server.js"
+crontabLine="@reboot sudo /usr/bin/nodejs $BACKENDPATH/server.js"
 crontabLineEscapeCharacters="${crontabLine//\*/\\*}"
 echo "Escape: $crontabLineEscapeCharacters"
 if crontab -u pi -l ; then

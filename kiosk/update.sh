@@ -7,10 +7,6 @@ SCRIPT=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 SCRIPTPATH=$(dirname "$SCRIPT")
 
-
-# Full path of this file without filename
-# pathProject=`dirname $(realpath $0)`
-
 # Flag to know if the install file has changed (0: not changed - 1: changed)
 flag=0
 
@@ -19,7 +15,7 @@ installFilename="install.sh"
 installNew="./${installFilename}"
 installOld="/home/pi/${installFilename}_Old"
 
-# Cd folder that contain project
+# Cd folder that contain this script
 cd $SCRIPTPATH
 
 # Load log4bash (only is was not loaded)

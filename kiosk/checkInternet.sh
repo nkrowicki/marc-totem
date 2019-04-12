@@ -5,11 +5,7 @@ SCRIPT=$(readlink -f "$0")
 # Absolute path this script is in, thus /home/user/bin
 SCRIPTPATH=$(dirname "$SCRIPT")
 
-
-# Full path of this file without filename
-# pathProject=`dirname $(realpath $0)`
-
-# Cd folder that contain project
+# Cd folder that contain this script
 cd $SCRIPTPATH
 
 # Load log4bash (only is was not loaded)
