@@ -9,14 +9,11 @@ set -e  # Fail on first error
 
 # Vars
 
-# Absolute path to this script, e.g. /home/user/bin/foo.sh
-SCRIPT=$(readlink -f "$0")
-# Absolute path this script is in, thus /home/user/bin
-SCRIPTPATH=$(dirname "$SCRIPT")
+# Load pathsUtils (only is was not loaded)
+if [ -z "$SCRIPT" ]; then 
+      source /home/pi/marc-totem/kiosk/pathUtils.sh
+fi
 
-
-# Cd folder that contain this script
-cd $SCRIPTPATH
 # Log Filename 
 filenameLog="kiosk.log"
 LOGFILE="${SCRIPTPATH}/${filenameLog}"

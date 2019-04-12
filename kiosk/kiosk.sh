@@ -3,10 +3,10 @@
 #######################################################################
 # Start Vars declaration
 
-# Absolute path to this script, e.g. /home/user/bin/foo.sh
-SCRIPT=$(readlink -f "$0")
-# Absolute path this script is in, thus /home/user/bin
-SCRIPTPATH=$(dirname "$SCRIPT")
+# Load pathsUtils (only is was not loaded)
+if [ -z "$SCRIPT" ]; then 
+      source /home/pi/marc-totem/kiosk/pathUtils.sh
+fi
 
 
 # Server PORT
@@ -23,12 +23,6 @@ url="http://localhost:$PORT"
 # End Vars declaration
 #######################################################################
 
-
-
-
-
-# Cd folder that contain this script
-cd $SCRIPTPATH
 
 # Load log4bash (only is was not loaded)
 if [ "$(type -t log)" != 'function' ]; then
