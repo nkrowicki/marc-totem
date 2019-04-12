@@ -20,6 +20,10 @@ fileLog="kiosk.log"
 # Absolute path to 'nodejs' (e.g.: /usr/bin/nodejs)
 NODEJS=$(which nodejs)
 
+# Vars use to create symlinks
+dstIMGS="$FRONTENDPATH/public/imgs" 
+srcIMGS="/home/pi/Desktop/imgs"
+
 scriptUpdate="update.sh"
 TODAY=$(date +%F)
 autostartFile="/etc/xdg/lxsession/LXDE-pi/autostart"
@@ -183,6 +187,18 @@ rm mycron
 #################################################################################
 # end crontab config
 #################################################################################
+
+# Create symlinks in desktop to img directory
+echo "Check if exist $srcIMGS"
+if rm $srcIMGS > /dev/null 2>&1
+then
+    echo "Yes, exist!"
+    echo "Delete $srcIMGS OK"
+else
+    echo "Not exist!"
+fi
+echo "Create Symlink $dstIMGS to $srcIMGS"
+ln -s $dstIMGS $srcIMGS
 
 # Create $fileLog only if not exist
 echo "Create fileLog ($fileLog) only if not exist"

@@ -10,6 +10,10 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 PROJECTPATH=$(dirname "$SCRIPTPATH")
 # Absolute BACKEND path
 BACKENDPATH="$PROJECTPATH/backend"
+# Absolute FRONTEND path
+FRONTENDPATH="$PROJECTPATH/frontend"
+# Absolute KIOSK path
+KIOSKPATH="$PROJECTPATH/kiosk"
 
 # Cd folder that contain this script
 cd $SCRIPTPATH
