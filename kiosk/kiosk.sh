@@ -97,7 +97,7 @@ xset -dpms
 # Verify if port $PORT is listen
 log "Verify status port $PORT:"
 
-if lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null ; then
+if sudo lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null ; then
     log "Port $PORT: LISTEN"
 else
     log "Port $PORT: NOT LISTEN"
