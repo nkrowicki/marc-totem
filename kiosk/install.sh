@@ -210,8 +210,8 @@ if [ ! -f $fileLog ]; then
     touch $fileLog
 fi
 
-echo "Run: Cd .. (Root directory of this project)"
-cd ..
+echo "Run: Cd $PROJECTPATH (Root directory of this project)"
+cd $PROJECTPATH
 
 echo "Add execution permissions for bash and javascript files in the whole project"
 find . -name "*.sh" -exec chmod +x {} \;
