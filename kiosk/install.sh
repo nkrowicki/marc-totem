@@ -18,7 +18,7 @@ log "Start Install.sh"
 
 fileLog="kiosk.log"
 
-# License File Path
+# Path to file that contain the license code
 licenseFile="/home/pi/license.txt"
 
 # Absolute path to 'nodejs' (e.g.: /usr/bin/nodejs)
