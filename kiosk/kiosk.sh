@@ -8,7 +8,6 @@ if [ -z "$SCRIPT" ]; then
       source /home/pi/marc-totem/kiosk/pathUtils.sh
 fi
 
-
 # Server PORT
 PORT="8080"
 
@@ -28,10 +27,6 @@ url="http://localhost:$PORT"
 if [ "$(type -t log)" != 'function' ]; then
         source log4bash.sh
 fi
-
-
-
-
 
 #######################################################################
 # Start Functions declaration
@@ -65,10 +60,30 @@ start_chromium(){
         log "Execute Chromium" 
         /usr/bin/chromium-browser --noerrdialogs --disable-infobars --incognito --start-maximized --kiosk --force-device-scale-factor=1 $url &
 }
+
+# Function validateLicense
+validate_license(){
+    
+    # License File Path
+    licenseFile="/home/pi/license.txt"
+
+    MAC="$(cat /sys/class/net/eth0/address)"
+    MACFILE="$(cat $licenseFile)"
+
+    log "Check License"
+
+    if [ $MAC == $MACFILE ]; then
+        log "License ok"
+    else
+        log "Check license fail"
+        exit
+    fi
+}
 # End Functions declaration
 #######################################################################
 
-
+# Call function to Validate License
+validate_license
 
 log "Set url: $url"
 

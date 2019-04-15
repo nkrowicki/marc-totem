@@ -17,6 +17,10 @@ log "Start Install.sh"
 # Vars
 
 fileLog="kiosk.log"
+
+# License File Path
+licenseFile="/home/pi/license.txt"
+
 # Absolute path to 'nodejs' (e.g.: /usr/bin/nodejs)
 NODEJS=$(which nodejs)
 
@@ -69,6 +73,10 @@ echo "Set up auto login to our user-> Desktop autologin is the default behavior.
 echo "If it is not by default follow the following instructions:"
 echo "sudo raspi-config"
 echo "Go to 3 Boot Options -> B1 Desktop/CLI -> B4 Desktop autologin"
+
+
+echo "Create or if exist only modify date of $licenseFile"
+touch $licenseFile
 
 #################################################################################
 # start config "configFile"

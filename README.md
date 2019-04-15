@@ -10,9 +10,11 @@ Proyect developed for Marc.
 Note: This software generates a file called 'kiosk.log' which contains events that happen (errors, warnings and information)
 
 ## How to install:
-Open terminal and run the following command:
+1. Open terminal and run the following command:
 
 git clone https://github.com/nkrowicki/marc-totem.git && cd marc-totem/kiosk && sudo bash install.sh
+
+2. Configure /home/pi/license.txt with the code license
 
 ## How to reinstall:
 Open terminal and run the following command: (replace "DIRECTORY" for the directory where the project is located)
