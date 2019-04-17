@@ -16,6 +16,8 @@ git clone https://github.com/nkrowicki/marc-totem.git && cd marc-totem/kiosk && 
 
 2. Configure /home/pi/license.txt with the code license
 
+3. (Optional) Install AnyDesk 
+
 ## How to reinstall:
 Open terminal and run the following command: (replace "DIRECTORY" for the directory where the project is located)
 
